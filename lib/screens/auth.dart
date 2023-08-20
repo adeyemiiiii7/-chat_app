@@ -62,16 +62,16 @@ class _AuthScreenState extends State<AuthScreen> {
          //to get the picture stored in firebase
          //use await it's a future
          final imageUrl = await storageReference.getDownloadURL();
-         print(imageUrl);
-      }
-      await FirebaseFirestore.
-      instance
+        //  print(imageUrl);
+      // this would then create a new document in the firebase firestorage
+      await FirebaseFirestore.instance
       .collection('users').
       doc('userCredential.user!.uid')
       .set({'username' : 'to be done',
       'email': _enteredEmail,
-      'imageUrl': _selectedImage});
-      
+      'imageUrl': imageUrl
+          });
+      }
     } on FirebaseAuthException catch (error) {
       if (error.code == 'email-already-in-use') {}
       ScaffoldMessenger.of(context).clearSnackBars();
